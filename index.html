@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="transcludeExample">
+<head>
+    <title>List View</title>
+    <script src="angular.min.js"></script>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+		<link href="style.css" rel="stylesheet" />
+		<script src="app.js"></script>
+
+</head>
+<body ng-controller="ExampleController">
+
+	<list-view data="articles">
+		<div class="article col-md-3" ng-repeat="row in post">
+			<h3>{{row.title}}</h3>
+			<p>{{row.content}}</h3>
+		</div>
+	</list-view>
+	
+</body>
+</html>
