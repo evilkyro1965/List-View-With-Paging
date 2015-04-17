@@ -1,16 +1,18 @@
-  angular.module('transcludeExample', [])
-	.directive('listView', function(){
+  angular.module('transcludeExample', ['ngResource'])
+	.directive('listView', function($resource){
       return {
         restrict: 'E',
         scope: {listData:'=data'},
 				transclude:true,
 				link: function(scope, element, attrs, ctrl, transclude) {
 					scope.postPerPage = 2;
+					scope.page = 1;
 					var post = new Array();
-					for(var i=0;i<scope.postPerPage;i++) {
-						// the code here is executed once in its own scope
-						post[i] = scope.listData[i];
-					}
+					var postResource = $resource('json.php', {});
+					post = postResource.query(
+						{page:scope.page,postPerPage:scope.postPerPage},
+						function(data) {}
+					);
 					scope.post = post;
 					transclude(scope, function(clone, scope) {
 						element.append(clone);
